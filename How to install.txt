@@ -1,0 +1,31 @@
+how to install and run the project
+
+1. install python 3.8.10 or higher
+
+2. change the directory 
+    cd RAG
+
+3. create python environment
+    python -m venv env
+
+4. activate env
+    in ubuntu - source env/bin/activate
+    in windows - env\Scripts\activate
+
+5. install the requirements 
+    pip install -r requirements.txt
+
+6. add openAI APIkey and google api to .env file
+
+7. activate the apikey's
+    in ubuntu - source .env
+    in windows -
+        SET GOOGLE_TRANSLATE="google api key"
+        SET OPENAI = "openai apikey"
+
+8. export the flask app
+    in ubuntu - export FLASK_APP=manage.py
+    in windows - SET FLASK_APP=manage.py
+
+9. run the flask application
+    python manage.py run

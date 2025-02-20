@@ -1,0 +1,15 @@
+sentence_transformers
+pandas
+numpy
+openai==0.28
+Flask
+Flask-Bcrypt
+Flask-Login
+Flask-Migrate
+Flask-SQLAlchemy
+Flask-WTF
+google-cloud-translate
+faiss-cpu
+pypdf
+Flask-CLI
+reportlab

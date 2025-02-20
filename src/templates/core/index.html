@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<body>
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <!-- Chat Section -->
+            <div class="col-lg-7 col-md-12 mb-4">
+                <div class="overlay">
+                    <h1 class="text-center text-primary mb-4">VantageHire</h1>
+                    <div id="chat-box" class="chat-container" style="height:500px"></div>
+                    <form id="chat-form" class="chat-input d-flex mt-3">
+                        <input type="text" id="user-input" class="form-control" placeholder="Type your message..." aria-label="Type your message" required />
+                        <button class="btn btn-primary" type="submit" aria-label="Send message">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById("chat-box");
+        const chatForm = document.getElementById("chat-form");
+        const userInput = document.getElementById("user-input");
+        
+
+        function appendMessage(sender, message) {
+            const bubble = document.createElement("div");
+            bubble.className = sender === "bot" ? "chat-bubble bot-message" : "chat-bubble user-message";
+            bubble.innerHTML = message;
+            chatBox.appendChild(bubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        chatForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            appendMessage("user", message);
+            userInput.value = "";
+
+            try {
+                const response = await fetch("/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message }),
+                });
+                const data = await response.json();
+                appendMessage("bot", data.reply);
+            } catch (error) {
+                appendMessage("bot", "Error communicating with the server.");
+            }
+        });
+    </script>
+</body>
+{% endblock %}

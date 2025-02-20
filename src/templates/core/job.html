@@ -1,0 +1,29 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<body>
+    <div class="container my-5">
+        <h1 class="mb-4">Job Listings</h1>
+        <div class="accordion" id="jobAccordion">
+            {% for job in job_data %}
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="heading{{ loop.index }}">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}" aria-expanded="true" aria-controls="collapse{{ loop.index }}">
+                        {{ job.title }}
+                    </button>
+                </h2>
+                <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ loop.index }}" data-bs-parent="#jobAccordion">
+                    <div class="accordion-body">
+                        <strong>Occupation:</strong> {{ job.occupation }}<br>
+                        <strong>Employer Description:</strong> {{ job.employer_description }}<br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock %}
